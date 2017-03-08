@@ -22,10 +22,24 @@ void Account::Withdraw(int numberOfPennies)
 
 int Account::getBalance()
 {
-	return 0;
+	return _balanceInPennies;
 }
 
 int Account::getAccountNumber()
 {
 	return _accountNumber;
+}
+
+std::string Account::getCustomerName()
+{
+	return _accountOwner.getFullName();
+}
+
+void Account::createLog()
+{
+}
+
+std::string Account::showLog()
+{
+	
 }

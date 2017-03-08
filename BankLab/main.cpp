@@ -8,6 +8,7 @@ void DisplayMenu();
 void TransactMenu();
 void AddAccountMenu();
 void DisplayAccountsMenu();
+void DisplayLogMenu();
 
 int main()
 {
@@ -27,6 +28,7 @@ void DisplayMenu()
 		cout << "1) Add Account" << endl;
 		cout << "2) Transact" << endl;
 		cout << "3) Display accounts" << endl;
+		cout << "4) See logs" << endl;
 		cout << "What would you like to do? " << endl;
 		cin >> choice;
 
@@ -35,6 +37,7 @@ void DisplayMenu()
 		case 1: AddAccountMenu(); break;
 		case 2: TransactMenu(); break;
 		case 3: DisplayAccountsMenu(); break;
+		case 4: DisplayLogMenu(); break;
 		default: break;
 		}
 	}
@@ -89,8 +92,12 @@ void TransactMenu()
 
 	switch (transactionType) 
 	{
-	case 1: bank.Deposit(chosenAccount, pennies); break;
-	case 2: bank.Withdraw(chosenAccount, pennies); break;
+	case 1: bank.Deposit(chosenAccount, pennies); 
+			
+			break;
+	case 2: bank.Withdraw(chosenAccount, pennies); 
+			
+			break;
 	default: break;
 	}
 }
@@ -100,4 +107,9 @@ void DisplayAccountsMenu()
 	system("cls");
 	cout << bank.ShowAccounts();
 	system("pause");
+}
+
+void DisplayLogMenu()
+{
+
 }
