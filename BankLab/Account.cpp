@@ -11,13 +11,12 @@ Account::~Account()
 void Account::Deposit(int numberOfPennies)
 {
 	_balanceInPennies += numberOfPennies;	
-	//TODO: Add a message to the log
 }
 
 void Account::Withdraw(int numberOfPennies)
 {
 	_balanceInPennies -= numberOfPennies;
-	//TODO: Add a message to the log
+
 }
 
 int Account::getBalance()
@@ -35,11 +34,27 @@ std::string Account::getCustomerName()
 	return _accountOwner.getFullName();
 }
 
-void Account::createLog()
+void Account::createLog(int accountNumber, int amount, std::string makeLog)
 {
+	if (makeLog == "deposit")
+	{
+		std::string output = "Deposited " + std::to_string(amount) + " pennies into Account #: " + std::to_string(accountNumber) + "\n";
+		_log.push_back(output);
+	}
+
+	else if(makeLog == "withdraw")
+	{
+		std::string output = "Withdrew " + std::to_string(amount) + " pennies into Account # " + std::to_string(accountNumber) + "\n";
+		_log.push_back(output);
+	}
 }
 
 std::string Account::showLog()
 {
-	
+	std::string output;
+	for (std::string &log : _log)
+	{
+		output += log + "\n";
+	}
+	return output;
 }

@@ -3,7 +3,6 @@
 #include<string>
 #include "Account.h"
 
-//changes
 class Bank
 {
 private:
@@ -17,8 +16,9 @@ public:
 	void CreateAccount(Account newAccount);
 	std::string ShowAccounts();
 	std::string ListAccounts();
+	std::string getLog(int accountNumber);
 
 	void Deposit(int accountNumber, int amount);
-	void Withdraw(int accountNumber, int amount);
+	void Withdraw(int accountNumber, int amount, bool &error);
 };
 

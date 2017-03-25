@@ -9,6 +9,7 @@ void TransactMenu();
 void AddAccountMenu();
 void DisplayAccountsMenu();
 void DisplayLogMenu();
+void TransactError();
 
 int main()
 {
@@ -41,8 +42,6 @@ void DisplayMenu()
 		default: break;
 		}
 	}
-
-
 }
 
 void AddAccountMenu()
@@ -67,7 +66,6 @@ void AddAccountMenu()
 
 void TransactMenu()
 {
-	//Get account
 	system("cls");
 	cout << "Which Account?" << endl;
 	cout << bank.ListAccounts() << endl;
@@ -75,7 +73,6 @@ void TransactMenu()
 	int chosenAccount;
 	cin >> chosenAccount;
 
-	//Get the transaction type
 	system("cls");
 	cout << "1) Deposit" << endl;
 	cout << "2) Withdraw" << endl;
@@ -83,23 +80,24 @@ void TransactMenu()
 	int transactionType;
 	cin >> transactionType;
 
-	//get the amount
 	system("cls");
-	cout << "How Many Pennies? ";
 	int pennies;
-	cin >> pennies;
+	do 
+	{
+		cout << "How Many Pennies? ";
+		cin >> pennies;
+	} while (pennies < 0);
 
-
+	bool errorTransaction = false;
 	switch (transactionType) 
 	{
-	case 1: bank.Deposit(chosenAccount, pennies); 
-			
-			break;
-	case 2: bank.Withdraw(chosenAccount, pennies); 
-			
-			break;
+	case 1: bank.Deposit(chosenAccount, pennies); break;
+	case 2: bank.Withdraw(chosenAccount, pennies, errorTransaction); break;
 	default: break;
 	}
+
+	if (errorTransaction == true)
+		TransactError();
 }
 
 void DisplayAccountsMenu()
@@ -111,5 +109,18 @@ void DisplayAccountsMenu()
 
 void DisplayLogMenu()
 {
+	cout << "Which Account?" << endl;
+	cout << bank.ListAccounts() << endl;
 
+	int chosenAccount;
+	cin >> chosenAccount;
+
+	cout << bank.getLog(chosenAccount);
+	system("pause");
+}
+
+void TransactError()
+{
+	cout << "Error in transaction. Please try again. \n";
+	system("pause");
 }

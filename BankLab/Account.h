@@ -18,7 +18,7 @@ public:
 	int getBalance();
 	int getAccountNumber();
 	std::string getCustomerName();
-	void createLog();
+	void createLog(int accountNumber, int amount, std::string makeLog);
 	std::string showLog();
 };
 

@@ -23,7 +23,6 @@ std::string Bank::ShowAccounts()
 	std::string output = "Accounts for " + _name + "\n";
 	for (Account account : _accounts)
 	{		
-		//TODO: Display as Account Number - LastName, FirstName - Balance
 		output += std::to_string(account.getAccountNumber()) + " - " + account.getCustomerName() + " - " + std::to_string(account.getBalance()) + "\n";
 	}
 	return output;
@@ -32,45 +31,56 @@ std::string Bank::ShowAccounts()
 std::string Bank::ListAccounts()
 {
 	std::string output = "Accounts for " + _name + "\n";
-	int index = 1;
 	for (Account account : _accounts)
 	{
-		output += std::to_string(index) + ") " + std::to_string(account.getAccountNumber()) += "\n";
-		index++;
+		output += std::to_string(account.getAccountNumber()) += "\n";
 	}
 	return output;
 }
 
-// Bank.deposit(int accNum, amt, _accounts)
+std::string Bank::getLog(int accountNumber)
+{
+	for (Account &account : _accounts) {
+		if (account.getAccountNumber() == accountNumber) {
+			return account.showLog();
+		}
+	}
+}
 
 void Bank::Deposit(int accountNumber, int amount)
 {
-
-	/*for (int i = 0; i < _accounts.size(); i++)
-	{
-
-		if (_accounts[i].getAccountNumber)
-			_accounts.deposit(amount);
-	}*/
-
 	for (Account &account : _accounts) {
 		if (account.getAccountNumber() == accountNumber) {
+			std::string makeLog = "deposit";
 			account.Deposit(amount);
+			account.createLog(accountNumber, amount, makeLog);
 			return;
 		}
 	}
 	return;
 }
 
-void Bank::Withdraw(int accountNumber, int amount)
+void Bank::Withdraw(int accountNumber, int amount, bool &error)
 {
 	for (Account &account : _accounts) {
 		if (account.getAccountNumber() == accountNumber) {
-			account.Withdraw(amount);
-			return;
+			std::string makeLog = "withdraw";
+			if (account.getBalance() >= amount)
+			{
+				account.Withdraw(amount);
+				account.createLog(accountNumber, amount, makeLog);
+				return;
+			}
+			else
+			{
+				error = true;
+				return;
+			}
 		}
 	}
 	return;
 }
+
+
 
 
